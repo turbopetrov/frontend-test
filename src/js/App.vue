@@ -1,14 +1,17 @@
 <template lang="pug">
-#app.page
- .background
-  auth    
+#app.page 
+  auth
+  account-list
+       
 </template>
 
 <script>
 import auth from './components/auth.vue';
+import accaunt_list from './components/account-list.vue';
 export default { 
   components:{
     auth,
+    'account-list': accaunt_list,
   },
   data() {
     return {};
@@ -20,10 +23,8 @@ export default {
   .page{
     margin: 0;
     padding: 0;
+    background: url('../assets/img/bg.jpg') fixed;
+    
   }
-  .background{     
-    height: 100vh;   
-    background-image: url('../assets/img/bg.jpg');
-    background-size: cover;
-  }
+  
 </style>

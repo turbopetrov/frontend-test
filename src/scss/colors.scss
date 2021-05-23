@@ -4,4 +4,8 @@ $white: #fff;
 $grey: #8b8b8b;
 $orange: #FDB703;
 
+.blur{
+  background: $dark-grad;
+  backdrop-filter: blur(8px);
+}
   

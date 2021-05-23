@@ -1,6 +1,6 @@
 <template lang="pug">
 .auth
-  .auth__wrapper
+  .auth__wrapper.blur
     form.auth__form  
       h2.auth__title.heading_lg.
         Авторизация
@@ -22,7 +22,7 @@
 <script>
 import input from './UI/app-input.vue';
 import submit from './UI/app-submit.vue';
-import acrylic from './UI/acrylic.vue';
+
 export default {
   components:{
     'app-input': input,
@@ -45,9 +45,7 @@ export default {
       box-sizing: border-box;      
       width: 550px;
       height: 660px;
-      padding: 65px 80px 75px 80px;
-      background: $dark-grad;
-      backdrop-filter: blur(5px);
+      padding: 65px 80px 75px 80px;          
     }
     &__form{
       height: 100%;
