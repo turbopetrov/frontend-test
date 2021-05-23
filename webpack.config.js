@@ -65,6 +65,7 @@ module.exports = {
               patterns: [
                 './scss/colors.scss',
                 './scss/heading.scss',
+                './scss/paragraph.scss',
             ]
             }
           }
