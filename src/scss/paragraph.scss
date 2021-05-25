@@ -7,6 +7,11 @@
   font-style:  italic;
   color: $grey;
 }
+.paragraph_lg{
+  @extend %paragraph;
+  font-size: 2em;
+  line-height: 100%;
+}
 .paragraph_md{
   @extend %paragraph;
   font-size: 1.25em;

@@ -15,7 +15,7 @@ export default {
         login: 'a',
         pass: 'qwerty1',
         name: 'Георгий Тамазович Джикия',
-        img: '../../../assets/img/account-img/ghikia.jpeg'
+        img: '../../../assets/img/account-img/ghikia.jpeg',
       },
       {
         id: 3,
