@@ -1,54 +1,82 @@
 <template lang="pug">
-  label
-    input.input(type='text' :required='isRequire')
-    span.input__placeholder.paragraph_md|{{placeholder}}      
-      span.input__require-sign(v-if='isRequire')| *
+label 
+  textarea.input(
+      v-if='inputType==="area"'
+      type="text" 
+      :required="isRequire" 
+      v-model='inputValue'    
+      ) 
+  input.input(
+    v-else
+    type="text" 
+    :required="isRequire" 
+    v-model='inputValue'    
+    )
+  
+  span.paragraph_md(:class='(inputValue==="")?"input__placeholder":"input__placeholder_xs"')|{{ placeholder }}
+    span.input__require-sign(v-if='isRequire')| *
 </template>
 
 <script>
 export default {
   props: {
+    inputType: String,
     isRequire: Boolean,
-    placeholder: String,    
-},
-  data(){
-    return{}
-  }
-}
+    placeholder: String,
+  },
+  data() {
+    return {
+      inputValue: ""
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-label{
+label {
   position: relative;
 }
-  .input{
+.input {
+  position: absolute;
+  color: $white;
+  border: none;
+  border-bottom: 2px solid $white;
+  background: none;
+  outline: none;
+  width: 100%;
+  height: 31px;
+  padding-left: 15px;
+  transition: 0.2s;
+  &__placeholder {
     position: absolute;
-    color: $white;
-    border: none;
-    border-bottom: 2px solid $white;
-    background: none;
-    outline: none;
-    width: 100%;
-    height: 31px;
-    padding-left: 15px;
-    transition: .2s;
-    &__placeholder{
+    top: 0;
+    left: 15px;
+    transition: 0.5s;
+    &_xs {
       position: absolute;
-      top:0;
-      left: 15px;
-      transition: .5s;
-    }
-    &__require-sign{
-      color:$orange;
-    }
-    &:focus{
-      border: 2px solid $white;
-      border-radius: 5px;
-    }
-    &:focus~.input__placeholder,
-    &:valid~.input__placeholder{
       font-size: 0.85em;
+      left: 15px;
       top: -20px;
     }
   }
+  &__require-sign {
+    color: $orange;
+  }
+  &:focus {
+    border: 2px solid $white;
+    border-radius: 5px;
+  }
+  
+  &:focus ~ .input__placeholder {
+    font-size: 0.85em;
+    top: -20px;
+  }
+  
+}
+textarea.input{
+  min-height: 100px;
+  border: 2px solid $white;
+  border-radius: 5px;
+  
+}
 </style>
