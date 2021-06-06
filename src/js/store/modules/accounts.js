@@ -4,68 +4,39 @@ export default {
   state:{
     allAccounts:[
       {
-        id: 1,
-        login: 'a',
+        id: 0,
+        email: 'shunin@gmail.com',
+        login: 'shunin',
         pass: 'qwerty1',
         name: 'Антон Владимирович Шунин',
+        department: 'Отдел разработки',
+        position: 'Фронтенд разработчик',
+        hireDate: '19.01.2018',
         img: '../../../assets/img/account-img/shunin.jpeg'
       },
       {
-        id: 2,
-        login: 'a',
-        pass: 'qwerty1',
+        id: 1,
+        login: 'ghikhia',
+        email: 'ghikhia@gmail.com',
+        pass: 'qwerty2',
         name: 'Георгий Тамазович Джикия',
+        department: 'Отдел разработки',
+        position: 'Фронтенд разработчик',
+        hireDate: '15.08.2012',
         img: '../../../assets/img/account-img/ghikia.jpeg',
       },
       {
-        id: 3,
-        login: 'a',
-        pass: 'qwerty1',
+        id: 2,
+        login: 'golovin',
+        email: 'golovin@gmail.com',
+        pass: 'qwerty3',
         name: 'Александр Сергеевич Головин',
+        department: 'Отдел разработки',
+        position: 'Фронтенд разработчик',
+        hireDate: '21.05.2002',
         img: '../../../assets/img/account-img/golovin.jpeg'
       },
-      {
-        id: 4,
-        login: 'a',
-        pass: 'qwerty1',
-        name: 'Антон Владимирович Шунин',
-        img: '../../../assets/img/account-img/shunin.jpeg'
-      },
-      {
-        id: 5,
-        login: 'a',
-        pass: 'qwerty1',
-        name: 'Антон Владимирович Шунин',
-        img: '../../../assets/img/account-img/shunin.jpeg'
-      },
-      {
-        id: 6,
-        login: 'a',
-        pass: 'qwerty1',
-        name: 'Антон Владимирович Шунин',
-        img: '../../../assets/img/account-img/shunin.jpeg'
-      },
-      {
-        id: 7,
-        login: 'a',
-        pass: 'qwerty1',
-        name: 'Антон Владимирович Шунин',
-        img: '../../../assets/img/account-img/shunin.jpeg'
-      },
-      {
-        id: 8,
-        login: 'a',
-        pass: 'qwerty1',
-        name: 'Антон Владимирович Шунин',
-        img: '../../../assets/img/account-img/shunin.jpeg'
-      },
-      {
-        id: 9,
-        login: 'a',
-        pass: 'qwerty1',
-        name: 'Антон Владимирович Шунин',
-        img: '../../../assets/img/account-img/shunin.jpeg'
-      },
+      
     ]
   },
   getters:{

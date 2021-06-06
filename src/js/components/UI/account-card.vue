@@ -3,8 +3,9 @@
     img.card__img(:src='imgPath')
     .card__name.paragraph_md.
       {{name}}
-    button.card__button.heading_xs.
-      Открыть профиль
+    router-link.router.link(:to='{name: "user-page", params: {id: this.id}}')
+      button.card__button.heading_xs.
+        Открыть профиль
 
 </template>
 
@@ -13,6 +14,7 @@ export default {
   props:{
     imgPath: String,
     name: String,
+    id: Number,
   },
   data(){
     return{}

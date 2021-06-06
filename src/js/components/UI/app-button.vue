@@ -35,6 +35,7 @@ export default {
   width: 280px;
   height: 58px;
   border-radius: 30px;
+  cursor: pointer;
   background: $orange;
   &__submit {
     background: $blue;

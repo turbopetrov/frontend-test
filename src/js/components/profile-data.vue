@@ -1,32 +1,34 @@
 <template lang="pug">
-  .user-data
-    .user-data__key.heading_md.
-      {{profileKey}}:
-    .user-data__value.paragraph_lg.
-      {{profileValue}}
-
+.user-data
+  .user-data__key.heading_md.
+    {{profileKey}}:
+  .user-data__value.paragraph_lg.
+    {{profileValue}}
 </template>
 
 <script>
 export default {
-  props:{
+  props: {
     profileKey: String,
     profileValue: String,
   },
-  data(){
-    return{
-
-    }
-  }
-}
+  data() {
+    return {};
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  .user-data{
-    display: flex;
-    flex-direction: row;  
-    &__value{
-      margin-left: 160px;
-    }
+.user-data {
+  display: flex;
+  flex-direction: row;
+  &__key {
+    width: 50%;
+    text-align: start;
   }
+  &__value {
+    width: 50%;
+    text-align: start;
+  }
+}
 </style>

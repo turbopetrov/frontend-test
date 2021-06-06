@@ -1,5 +1,5 @@
 <template lang="pug">
-.auth
+.auth  
   .auth__wrapper.blur
     form.auth__form 
       h2.auth__title.heading_lg.
@@ -7,10 +7,13 @@
       app-input.auth__login(isRequire, placeholder="Ваша электронная почта")
       app-input.auth__pass(isRequire, placeholder="Ваш пароль")
       a.auth__forgetPass.paragraph_sm(href="#") Забыли пароль?
-      app-button.auth__submit(
-        buttonType="submit"
-        buttonValue="Войти"
-        ) 
+      router-link.router-link(:to='{name:"account-list"}')  
+        app-button(
+          buttonType="submit"
+          buttonValue="Войти"
+          )
+      
+        
 </template>
 
 <script>
@@ -25,6 +28,11 @@ export default {
   data() {
     return {};
   },
+  methods:{
+    auth(){
+      console.log('test');
+    }
+  }
 };
 </script>
 
@@ -58,6 +66,6 @@ export default {
     top: 460px;
     left: 55%;
     cursor: pointer;
-  }
+  }  
 }
 </style>
