@@ -10,7 +10,8 @@ label
     v-else
     type="text" 
     :required="isRequire" 
-    v-model='inputValue'    
+    :value='inputValue'
+    @input='$emit("input", $event.target.value)'    
     )
   
   span.paragraph_md(:class='(inputValue==="")?"input__placeholder":"input__placeholder_xs"')|{{ placeholder }}
@@ -23,10 +24,11 @@ export default {
     inputType: String,
     isRequire: Boolean,
     placeholder: String,
+    inputValue: String,
   },
   data() {
     return {
-      inputValue: ""
+      
     };
   },
 };

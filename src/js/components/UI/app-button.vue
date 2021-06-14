@@ -1,11 +1,11 @@
 <template lang="pug">
-input.button.heading_xs(  
-  :type='buttonType',
+input.button.heading_xs(
+  :type="buttonType",
   :value="buttonValue",
+  
   @click='handler'
-  :class='buttonType==="submit"?"button__submit":null'
+  :class="buttonType === 'submit' ? 'button__submit' : null"
 )
-
 </template>
 
 <script>
@@ -17,11 +17,11 @@ export default {
   data() {
     return {};
   },
-  methods:{
-    handler(){
-      this.$emit('action')
-    }
-  }
+  methods: {
+    handler() {
+      this.$emit("action");
+    },
+  },
 };
 </script>
 

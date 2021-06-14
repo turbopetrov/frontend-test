@@ -44,6 +44,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "es6-promise": "^4.2.8",
     "vue": "^2.6.12",
     "vue-router": "^3.5.1",
