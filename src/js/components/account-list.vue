@@ -5,11 +5,11 @@
       h2.account-list__title.heading_lg Сотрудники
     .account-list__card-block
       account-card.account-list__card(
-        v-for="account in accounts",
-        :key="account.id",
-        :imgPath="account.img",
-        :name="account.name",
-        :id="account.id"
+        v-for="EMPLOYEE in EMPLOYEES",
+        :key="EMPLOYEE.id",
+        :imgPath="EMPLOYEE.img",
+        :name="EMPLOYEE.name",
+        :id="EMPLOYEE.id"
       )
 </template>
 
@@ -24,7 +24,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["accounts"]),
+    ...mapGetters(["EMPLOYEES"]),
   },
 };
 </script>

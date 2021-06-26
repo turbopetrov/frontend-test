@@ -2,8 +2,8 @@
 .user-page.blur
   .user-page__header
     h2.user-page__title.heading_xl.
-      {{accounts[id].name}}
-    img.user-page__img(:src="accounts[id].img")
+      {{EMPLOYEES[id].name}}
+    img.user-page__img(:src="EMPLOYEES[id].img")
   .user-page__profile
     .user-page__about-wrapper
       p.paragraph_md.user-page__about-text.
@@ -11,45 +11,42 @@
     .user-page__data-wrapper
       profile-data.user-page__data-row(
         profileKey="Логин",
-        :profileValue="accounts[this.id].login"
+        :profileValue="EMPLOYEES[this.id].login"
       )
       profile-data.user-page__data-row(
         profileKey="Email",
-        :profileValue="accounts[this.id].email"
+        :profileValue="EMPLOYEES[this.id].email"
       )
       profile-data.user-page__data-row(
         profileKey="Должность",
-        :profileValue="accounts[this.id].position"
+        :profileValue="EMPLOYEES[this.id].position"
       )
       profile-data.user-page__data-row(
         profileKey="Отдел",
-        :profileValue="accounts[this.id].department"
+        :profileValue="EMPLOYEES[this.id].department"
       )
       profile-data.user-page__data-row(
         profileKey="Зачислен",
-        :profileValue="accounts[this.id].hireDate"
+        :profileValue="EMPLOYEES[this.id].hireDate"
       ) 
 </template>
 
 <script>
 import profile_data from "./profile-data.vue";
 import { mapGetters } from "vuex";
-export default {  
+export default {
   components: {
     "profile-data": profile_data,
-  },  
-  
+  },
+
   data() {
-    return {
-      
-    };
+    return {};
   },
   computed: {
-    ...mapGetters(["accounts"]),
-    id(){
-      return this.$route.params.id
-    }
-    
+    ...mapGetters(["EMPLOYEES"]),
+    id() {
+      return this.$route.params.id;
+    },
   },
 };
 </script>

@@ -1,25 +1,16 @@
 <template lang="pug">
-.page 
+.page
   router-view
-       
+
 </template>
 
 <script>
 
-// import auth from './components/auth.vue';
-// import accaunt_list from './components/account-list.vue';
-// import user_page from './components/user-page.vue';
-// import user_settings from './components/user-settings.vue';
-export default { 
-  // components:{
-  //   auth,
-  //   'account-list': accaunt_list,
-  //   'user-page': user_page,
-  //   'user-settings': user_settings
-  // },
+
+export default {
   data() {
     return {};
-  },  
+  },
 };
 </script>
 
@@ -29,7 +20,6 @@ export default {
     padding: 0;
     background: url('../assets/img/bg.jpg') fixed;
     min-height: 100vh;
-    
   }
-  
+
 </style>

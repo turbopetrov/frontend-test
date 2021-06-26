@@ -1,8 +1,6 @@
-import Vue from 'vue';
-
 export default {
   state:{
-    allAccounts:[
+    employees:[
       {
         id: 0,
         email: 'shunin@gmail.com',
@@ -36,12 +34,14 @@ export default {
         hireDate: '21.05.2002',
         img: '../../../assets/img/account-img/golovin.jpeg'
       },
-      
     ]
   },
   getters:{
-    accounts(state){
-      return state.allAccounts;
+    EMPLOYEES(state){
+      return state.employees;
     }
+  },
+  actions:{
+    
   }
 }

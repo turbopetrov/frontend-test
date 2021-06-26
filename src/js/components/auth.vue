@@ -1,9 +1,9 @@
 <template lang="pug">
-.auth 
+.auth
   .auth__wrapper.blur
-    form.auth__form 
+    form.auth__form
       h2.auth__title.heading_lg.
-        Авторизация        
+        Авторизация
       app-input.auth__login(
         isRequire,
         placeholder="Ваша электронная почта",
@@ -18,15 +18,16 @@
       )
       a.auth__forgetPass.paragraph_sm(href="#") Забыли пароль?
       app-button(buttonType="button", buttonValue="Войти", @action="login()")
-      span.paragraph_sm(:class='loginStatus?"success":"error"').
-        {{message}} 
+      span.paragraph_sm(:class="LOGIN_STATUS ? 'success' : 'error'").
+        {{message}}
+      span.paragraph_sm| k2lH7wLztd
 </template>
 
 <script>
 import axios from "axios";
 import input from "./UI/app-input.vue";
 import button from "./UI/app-button.vue";
-
+import {mapGetters} from "vuex";
 export default {
   components: {
     "app-input": input,
@@ -36,29 +37,51 @@ export default {
     return {
       email: "",
       pass: "",
-      loginStatus:false,
-      message:""
+      message: "",
     };
+  },
+  computed:{
+    ...mapGetters(["LOGIN_STATUS"]),
   },
   methods: {
     login() {
-      axios
-        .post("http://test.atwinta.ru/api/v1/auth/login", {
-          email: this.email,
-          password: this.pass,
-        })
-        .then((response) => {
-          localStorage.setItem("token", response.data.token);
-          this.loginStatus=true;
-          this.message = "Вы авторизованы";
-          setTimeout(()=>{this.$router.push({ name: "account-list" })}, 1500);
-          
-        })
-        .catch((error) => {
-          console.log(error);
-          this.loginStatus=false
-          this.message="Неверный логин или пароль"
-        });
+      this.$api.auth.login({
+        email: this.email,
+        password: this.pass,
+      })
+      .then((response) => {
+        localStorage.setItem("token", response.data.token);
+        this.$store.commit('setUser', response.data.user)
+        this.$store.commit('changeLoginStatus', true);
+        this.message = "Вы авторизованы";
+        setTimeout(() => {
+          this.$router.push({ name: "account-list" });
+        }, 1500);
+      })
+      .catch((error) => {
+        console.log(error);
+        this.$store.commit('changeLoginStatus', false);
+        this.message = "Неверный логин или пароль";
+      });
+      // axios
+      //   .post("http://test.atwinta.ru/api/v1/auth/login", {
+      //     email: this.email,
+      //     password: this.pass,
+      //   })
+      //   .then((response) => {
+      //     localStorage.setItem("token", response.data.token);
+      //     this.$store.commit('setUser', response.data.user)
+      //     this.$store.commit('changeLoginStatus', true);
+      //     this.message = "Вы авторизованы";
+      //     setTimeout(() => {
+      //       this.$router.push({ name: "account-list" });
+      //     }, 1500);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //     this.$store.commit('changeLoginStatus', false);
+      //     this.message = "Неверный логин или пароль";
+      //   });
     },
   },
 };
@@ -95,10 +118,10 @@ export default {
     left: 55%;
     cursor: pointer;
   }
-  .success{
+  .success {
     color: greenyellow;
   }
-  .error{
+  .error {
     color: red;
   }
 }
