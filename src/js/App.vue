@@ -1,7 +1,6 @@
 <template lang="pug">
 .page
   router-view
-
 </template>
 
 <script>

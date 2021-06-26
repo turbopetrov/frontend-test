@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import input from "./UI/app-input.vue";
 import button from "./UI/app-button.vue";
 import {mapGetters} from "vuex";
@@ -55,7 +54,7 @@ export default {
         this.$store.commit('changeLoginStatus', true);
         this.message = "Вы авторизованы";
         setTimeout(() => {
-          this.$router.push({ name: "account-list" });
+          this.$router.push({ name: "workers-list" });
         }, 1500);
       })
       .catch((error) => {
@@ -63,25 +62,6 @@ export default {
         this.$store.commit('changeLoginStatus', false);
         this.message = "Неверный логин или пароль";
       });
-      // axios
-      //   .post("http://test.atwinta.ru/api/v1/auth/login", {
-      //     email: this.email,
-      //     password: this.pass,
-      //   })
-      //   .then((response) => {
-      //     localStorage.setItem("token", response.data.token);
-      //     this.$store.commit('setUser', response.data.user)
-      //     this.$store.commit('changeLoginStatus', true);
-      //     this.message = "Вы авторизованы";
-      //     setTimeout(() => {
-      //       this.$router.push({ name: "account-list" });
-      //     }, 1500);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //     this.$store.commit('changeLoginStatus', false);
-      //     this.message = "Неверный логин или пароль";
-      //   });
     },
   },
 };

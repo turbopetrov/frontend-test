@@ -1,9 +1,9 @@
 <template lang="pug">
-  .card    
+  .card
     img.card__img(:src='imgPath')
     .card__name.paragraph_md.
       {{name}}
-    router-link.router.link(:to='{name: "user-page", params: {id: this.id}}')
+    router-link.router.link(:to='{name: "worker-page", params: {id: this.id}}')
       button.card__button.heading_xs.
         Открыть профиль
 

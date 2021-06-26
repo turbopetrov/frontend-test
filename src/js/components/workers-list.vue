@@ -5,17 +5,18 @@
       h2.account-list__title.heading_lg Сотрудники
     .account-list__card-block
       account-card.account-list__card(
-        v-for="EMPLOYEE in EMPLOYEES",
-        :key="EMPLOYEE.id",
-        :imgPath="EMPLOYEE.img",
-        :name="EMPLOYEE.name",
-        :id="EMPLOYEE.id"
+        v-for="WORKER in WORKERS",
+        :key="WORKER.id",
+        :imgPath="WORKER.img",
+        :name="WORKER.name",
+        :id="WORKER.id"
       )
 </template>
 
 <script>
 import card from "./UI/account-card.vue";
 import { mapGetters } from "vuex";
+import {mapActions} from "vuex";
 export default {
   components: {
     "account-card": card,
@@ -24,8 +25,14 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["EMPLOYEES"]),
+    ...mapGetters(["WORKERS"]),
   },
+  methods:{
+    ...mapActions(["GET_WORKERS_FROM_API"]),
+  },
+  mounted(){
+    this.GET_WORKERS_FROM_API()
+    }
 };
 </script>
 

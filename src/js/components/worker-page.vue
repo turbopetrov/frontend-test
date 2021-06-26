@@ -2,8 +2,8 @@
 .user-page.blur
   .user-page__header
     h2.user-page__title.heading_xl.
-      {{EMPLOYEES[id].name}}
-    img.user-page__img(:src="EMPLOYEES[id].img")
+      {{WORKERS[id].name}}
+    img.user-page__img(:src="WORKERS[id].img")
   .user-page__profile
     .user-page__about-wrapper
       p.paragraph_md.user-page__about-text.
@@ -11,24 +11,24 @@
     .user-page__data-wrapper
       profile-data.user-page__data-row(
         profileKey="Логин",
-        :profileValue="EMPLOYEES[this.id].login"
+        :profileValue="WORKERS[this.id].login"
       )
       profile-data.user-page__data-row(
         profileKey="Email",
-        :profileValue="EMPLOYEES[this.id].email"
+        :profileValue="WORKERS[this.id].email"
       )
       profile-data.user-page__data-row(
         profileKey="Должность",
-        :profileValue="EMPLOYEES[this.id].position"
+        :profileValue="WORKERS[this.id].position"
       )
       profile-data.user-page__data-row(
         profileKey="Отдел",
-        :profileValue="EMPLOYEES[this.id].department"
+        :profileValue="WORKERS[this.id].department"
       )
       profile-data.user-page__data-row(
         profileKey="Зачислен",
-        :profileValue="EMPLOYEES[this.id].hireDate"
-      ) 
+        :profileValue="WORKERS[this.id].hireDate"
+      )
 </template>
 
 <script>
@@ -43,7 +43,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["EMPLOYEES"]),
+    ...mapGetters(["WORKERS"]),
     id() {
       return this.$route.params.id;
     },

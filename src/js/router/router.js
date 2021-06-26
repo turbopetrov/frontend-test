@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import auth from '../components/auth.vue';
-import accountList from '../components/account-list.vue';
-import userPage from '../components/user-page.vue';
+import workersList from '../components/workers-list.vue';
+import workerPage from '../components/worker-page.vue';
 
 Vue.use(Router);
 
@@ -10,21 +10,21 @@ Vue.use(Router);
 
 export default new Router({
   mode: 'history',
-  routes:[    
+  routes:[
     {
       path:'/',
       name: 'auth',
       component: auth,
     },
     {
-      path:'/accounts',
-      name: 'account-list',
-      component: accountList,
+      path:'/workers',
+      name: 'workers-list',
+      component: workersList,
     },
     {
-      path:'/accounts/:id',
-      name: 'user-page',
-      component: userPage,
+      path:'/workers/:id',
+      name: 'worker-page',
+      component: workerPage,
       props:true
     }
   ]
