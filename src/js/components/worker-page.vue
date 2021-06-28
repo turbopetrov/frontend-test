@@ -53,7 +53,7 @@ export default {
     ...mapActions(['GET_WORKER_DATA_FROM_API'])
   },
   mounted(){
-    this.GET_WORKER_DATA_FROM_API(104)
+    this.GET_WORKER_DATA_FROM_API(this.id)
     }
 };
 </script>
@@ -77,6 +77,7 @@ export default {
   &__title {
     max-width: 50%;
     color: $dark-grey;
+    margin-right: 80px;
   }
   &__img {
     width: 260px;

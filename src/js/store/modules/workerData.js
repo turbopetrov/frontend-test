@@ -1,34 +1,31 @@
-import axios from 'axios';
+import axios from "axios";
 export default {
-  state:{
-    workerData:{
-
-    }
+  state: {
+    workerData: {},
   },
-  getters:{
-    WORKER_DATA(state){
+  getters: {
+    WORKER_DATA(state) {
       return state.workerData;
-    }
+    },
   },
-  actions:{
-    GET_WORKER_DATA_FROM_API({commit}, user){
-      return axios.get('http://test.atwinta.ru/api/v1/workers/104',{
-        headers:{
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-          
-        },
-        
-      })
-        .then((response)=>{
-          commit('SET_WORKER_DATA_TO_STATE', response.data)
+  actions: {
+    GET_WORKER_DATA_FROM_API({ commit }, user) {
+      return axios
+        .get(`http://test.atwinta.ru/api/v1/workers/${user}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         })
-        .catch((error)=>console.error(error))
-    }
+        .then((response) => {
+          commit("SET_WORKER_DATA_TO_STATE", response.data);
+        })
+        .catch((error) => console.error(error));
+    },
   },
-  mutations:{
-    SET_WORKER_DATA_TO_STATE(state, data){
+  mutations: {
+    SET_WORKER_DATA_TO_STATE(state, data) {
       state.workerData = data;
       console.log(state.workerData);
-    }
-  }
-}
+    },
+  },
+};
