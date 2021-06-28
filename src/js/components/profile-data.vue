@@ -2,7 +2,7 @@
 .user-data
   .user-data__key.heading_md.
     {{profileKey}}:
-  .user-data__value.paragraph_lg.
+  .user-data__value.paragraph_md.
     {{profileValue}}
 </template>
 
@@ -28,7 +28,9 @@ export default {
   }
   &__value {
     width: 50%;
-    text-align: start;
+    text-align: end;
+    vertical-align: middle;
+    margin-left: 100px;
   }
 }
 </style>

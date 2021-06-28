@@ -2,38 +2,39 @@
 .user-page.blur
   .user-page__header
     h2.user-page__title.heading_xl.
-      {{WORKERS[id].name}}
-    img.user-page__img(:src="WORKERS[id].img")
+      {{WORKER_DATA.name}}
+    img.user-page__img(:src="WORKER_DATA.image")
   .user-page__profile
     .user-page__about-wrapper
       p.paragraph_md.user-page__about-text.
-        “Наконец громовый удар раздался в другой раз и вся четверня со всем: с коляской и кучером, так что из-под кожи выглядывала пакля, был искусно зашит. Во всю дорогу суров и с миллионщиком, и с ними.”
+        {{WORKER_DATA.about}}
     .user-page__data-wrapper
       profile-data.user-page__data-row(
         profileKey="Логин",
-        :profileValue="WORKERS[this.id].login"
+        :profileValue="WORKER_DATA.login"
       )
       profile-data.user-page__data-row(
         profileKey="Email",
-        :profileValue="WORKERS[this.id].email"
+        :profileValue="WORKER_DATA.email"
       )
       profile-data.user-page__data-row(
         profileKey="Должность",
-        :profileValue="WORKERS[this.id].position"
+        :profileValue="WORKER_DATA.worker.position"
       )
       profile-data.user-page__data-row(
         profileKey="Отдел",
-        :profileValue="WORKERS[this.id].department"
+        :profileValue="WORKER_DATA.worker.department"
       )
       profile-data.user-page__data-row(
         profileKey="Зачислен",
-        :profileValue="WORKERS[this.id].hireDate"
+        :profileValue="WORKER_DATA.worker.adopted_at"
       )
 </template>
 
 <script>
 import profile_data from "./profile-data.vue";
 import { mapGetters } from "vuex";
+import {mapActions} from "vuex";
 export default {
   components: {
     "profile-data": profile_data,
@@ -43,11 +44,17 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["WORKERS"]),
+    ...mapGetters(["WORKER_DATA"]),
     id() {
       return this.$route.params.id;
     },
   },
+  methods:{
+    ...mapActions(['GET_WORKER_DATA_FROM_API'])
+  },
+  mounted(){
+    this.GET_WORKER_DATA_FROM_API(104)
+    }
 };
 </script>
 
