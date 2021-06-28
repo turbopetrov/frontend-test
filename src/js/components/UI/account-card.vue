@@ -36,6 +36,8 @@ export default {
     padding: 25px 37px 40px 37px;    
     &__img{
       border-radius: 50%;
+      width: 172px;
+      height: 172px;
     }
     &__button{
       align-self: center;

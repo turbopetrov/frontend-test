@@ -7,7 +7,7 @@
       account-card.account-list__card(
         v-for="WORKER in WORKERS",
         :key="WORKER.id",
-        :imgPath="WORKER.img",
+        :imgPath="WORKER.image",
         :name="WORKER.name",
         :id="WORKER.id"
       )
