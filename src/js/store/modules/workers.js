@@ -24,7 +24,6 @@ export default {
   mutations:{
     SET_WORKERS_TO_STATE(state, workers){
       state.workers = workers
-      
     }
   }
 }

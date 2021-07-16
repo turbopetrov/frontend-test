@@ -5,7 +5,7 @@
       h2.user-settings__title.heading_lg Профиль
     form.user-settings__form
       .user-settings__input-wrapper
-        app-input.user-settings__input_lg(isRequire, placeholder="Ваше имя")
+        app-input.user-settings__input_lg(isRequire, placeholder="Ваше имя")|{{this.USER.name}}
       .user-settings__input-wrapper
         app-input.user-settings__input_sm(isRequire, placeholder="Email")
         app-input.user-settings__input_sm(isRequire=false, placeholder="Номер телефона")
@@ -33,13 +33,15 @@
           buttonType="button" 
           buttonValue="Выйти"
           @action='exit'
-          
+
           )
 </template>
 
 <script>
 import input from "./UI/app-input.vue";
 import button from "./UI/app-button.vue";
+import { mapActions } from 'vuex';
+import { mapGetters } from  'vuex';
 export default {
   components: {
     "app-input": input,
@@ -48,10 +50,18 @@ export default {
   data() {
     return {};
   },
+  computed:{
+    ...mapGetters(["USER"])
+  },
   methods:{
+    ...mapActions(["GET_USER_FROM_API"]),
     exit(){
       console.log('exit from settings');
     }
+  },
+  mounted(){
+    this.GET_USER_FROM_API();
+    console.log(this.USER);
   }
 };
 </script>

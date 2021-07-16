@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import auth from '../components/auth.vue';
 import workersList from '../components/workers-list.vue';
 import workerPage from '../components/worker-page.vue';
+import userSettings from '../components/user-settings.vue';
 
 Vue.use(Router);
 
@@ -26,6 +27,13 @@ export default new Router({
       name: 'worker-page',
       component: workerPage,
       props:true
-    }
+    },
+    {
+      path:'/user',
+      name: 'user-settings',
+      component: userSettings,
+      props:true
+    },
+
   ]
 })

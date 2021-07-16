@@ -33,7 +33,7 @@ export default {
     border: 2px solid $orange;
     border-radius: 10px;
     box-sizing: border-box;
-    padding: 25px 37px 40px 37px;    
+    padding: 25px 37px 40px 37px;
     &__img{
       border-radius: 50%;
       width: 172px;

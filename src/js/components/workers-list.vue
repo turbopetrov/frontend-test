@@ -3,6 +3,11 @@
   .account-list__wrapper
     .account-list__header
       h2.account-list__title.heading_lg Сотрудники
+      app-button(
+        buttonType="button",
+        buttonValue="Мой профиль",
+        @action="goToUserProfile"
+      )
     .account-list__card-block
       account-card.account-list__card(
         v-for="WORKER in WORKERS",
@@ -15,24 +20,29 @@
 
 <script>
 import card from "./UI/account-card.vue";
+import button from "./UI/app-button.vue";
 import { mapGetters } from "vuex";
-import {mapActions} from "vuex";
+import { mapActions } from "vuex";
 export default {
   components: {
     "account-card": card,
+    "app-button": button,
   },
   data() {
     return {};
   },
   computed: {
-    ...mapGetters(["WORKERS"]),
+    ...mapGetters(["WORKERS","USER"]),
   },
-  methods:{
+  methods: {
     ...mapActions(["GET_WORKERS_FROM_API"]),
-  },
-  mounted(){
-    this.GET_WORKERS_FROM_API()
+    goToUserProfile(){
+      this.$router.push({name:"user-settings"});
     }
+  },
+  mounted() {
+    this.GET_WORKERS_FROM_API();
+  },
 };
 </script>
 
@@ -56,7 +66,7 @@ export default {
   }
   &__header {
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     width: 100%;
     margin-top: 65px;
     margin-bottom: 40px;
