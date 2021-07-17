@@ -9,8 +9,8 @@ export default {
     }
   },
   actions:{
-    GET_WORKERS_FROM_API({commit}){
-      return axios.get('http://test.atwinta.ru/api/v1/workers',{
+    GET_WORKERS_FROM_API({commit}, page=1){
+      return axios.get(`http://test.atwinta.ru/api/v1/workers?page=${page}`,{
         headers:{
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

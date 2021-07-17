@@ -8,6 +8,9 @@
         buttonValue="Мой профиль",
         @action="goToUserProfile"
       )
+    app-pagination(
+      @changePage="getWorkersFromApi"
+    )
     .account-list__card-block
       account-card.account-list__card(
         v-for="WORKER in WORKERS",
@@ -19,6 +22,7 @@
 </template>
 
 <script>
+import pagination from './UI/pagination.vue'
 import card from "./UI/account-card.vue";
 import button from "./UI/app-button.vue";
 import { mapGetters } from "vuex";
@@ -27,6 +31,7 @@ export default {
   components: {
     "account-card": card,
     "app-button": button,
+    "app-pagination": pagination
   },
   data() {
     return {};
@@ -38,6 +43,9 @@ export default {
     ...mapActions(["GET_WORKERS_FROM_API"]),
     goToUserProfile(){
       this.$router.push({name:"user-settings"});
+    },
+    getWorkersFromApi(page){
+      this.GET_WORKERS_FROM_API(page);
     }
   },
   mounted() {
