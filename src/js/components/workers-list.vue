@@ -9,7 +9,8 @@
         @action="goToUserProfile"
       )
     app-pagination(
-      @changePage="getWorkersFromApi"
+      :pageCount = "this.PAGINATION.pageCount"
+      @changePage="changePage"
     )
     .account-list__card-block
       account-card.account-list__card(
@@ -37,14 +38,14 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["WORKERS","USER"]),
+    ...mapGetters(["WORKERS","USER", "PAGINATION"]),
   },
   methods: {
     ...mapActions(["GET_WORKERS_FROM_API"]),
     goToUserProfile(){
       this.$router.push({name:"user-settings"});
     },
-    getWorkersFromApi(page){
+    changePage(page){
       this.GET_WORKERS_FROM_API(page);
     }
   },

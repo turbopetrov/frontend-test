@@ -2,19 +2,26 @@
   .pagination
     ul.pagination__bar
       li.pagination__item.heading_xs(
-        v-for='page in pages'
+        :class='PAGINATION.currentPage===page?"pagination__item_active":null'
+        v-for='page in pageCount'
         @click='handler(page)'
         ).
         {{page}}
-      
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
 export default {
+  props:{
+    pageCount: Number
+  },
   data(){
     return{
-      pages: 10,
+
     }
+  },
+  computed:{
+    ...mapGetters(["PAGINATION"])
   },
   methods:{
     handler(page){
@@ -54,6 +61,10 @@ export default {
     &:hover{
       background-color: $orange;
     }
+    &_active{
+      background-color: $orange;
+    }
   }
 }
+
 </style>
