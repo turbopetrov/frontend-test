@@ -50,7 +50,6 @@ export default {
       })
       .then((response) => {
         localStorage.setItem("token", response.data.token);
-        // this.$store.commit('SET_USER_TO_STATE', response.data.user)
         this.$store.commit('changeLoginStatus', true);
         this.message = "Вы авторизованы";
         setTimeout(() => {
@@ -63,7 +62,19 @@ export default {
         this.message = "Неверный логин или пароль";
       });
     },
+    autoLogin(){
+      if (localStorage.getItem('token')){
+        this.$store.commit('changeLoginStatus', true);
+        this.message = "Вы авторизованы";
+        setTimeout(() => {
+          this.$router.push({ name: "workers-list" });
+        }, 1500);
+      }
+    }
   },
+  mounted(){
+    this.autoLogin()
+  }
 };
 </script>
 
