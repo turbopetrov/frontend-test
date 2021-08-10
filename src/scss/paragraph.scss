@@ -22,3 +22,9 @@
   font-size: 1em;
   line-height: 100%;
 }
+.paragraph_xs{
+  @extend %paragraph;
+  font-size: .9em;
+  line-height: 200%;
+}
+

@@ -50,7 +50,7 @@ export default {
       })
       .then((response) => {
         localStorage.setItem("token", response.data.token);
-        this.$store.commit('SET_USER_TO_STATE', response.data.user)
+        // this.$store.commit('SET_USER_TO_STATE', response.data.user)
         this.$store.commit('changeLoginStatus', true);
         this.message = "Вы авторизованы";
         setTimeout(() => {

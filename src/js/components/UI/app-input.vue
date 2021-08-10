@@ -1,21 +1,25 @@
 <template lang="pug">
-label 
+label
+  span.paragraph_xs.default-value|{{defaultValue}}
   textarea.input(
-      v-if='inputType==="area"'
-      type="text" 
-      :required="isRequire" 
-      v-model='inputValue'    
-      ) 
+    v-if="inputType === 'area'",
+    type="text",
+    :required="isRequire",
+    :value="inputValue",
+    @input="$emit('input', $event.target.value)"
+  )
   input.input(
-    v-else
-    type="text" 
-    :required="isRequire" 
-    :value='inputValue'
-    @input='$emit("input", $event.target.value)'    
-    )
-  
-  span.paragraph_md(:class='(inputValue==="")?"input__placeholder":"input__placeholder_xs"')|{{ placeholder }}
-    span.input__require-sign(v-if='isRequire')| *
+    v-else,
+    type="text",
+    :required="isRequire",
+    :value="inputValue",
+    @input="$emit('input', $event.target.value)"
+  )
+
+  span.paragraph_md(
+    :class="inputValue === '' ? 'input__placeholder' : 'input__placeholder_xs'"
+  ) {{ placeholder }}
+    span.input__require-sign(v-if="isRequire") *
 </template>
 
 <script>
@@ -25,11 +29,10 @@ export default {
     isRequire: Boolean,
     placeholder: String,
     inputValue: String,
+    defaultValue: String,
   },
   data() {
-    return {
-      
-    };
+    return {};
   },
 };
 </script>
@@ -68,17 +71,18 @@ label {
     border: 2px solid $white;
     border-radius: 5px;
   }
-  
+
   &:focus ~ .input__placeholder {
     font-size: 0.85em;
     top: -20px;
   }
-  
 }
-textarea.input{
+textarea.input {
   min-height: 100px;
   border: 2px solid $white;
   border-radius: 5px;
-  
+}
+.default-value{
+  margin-top: 20px;
 }
 </style>
