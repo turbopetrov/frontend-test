@@ -1,7 +1,7 @@
-export default function (instance) {
+export default function workersModule(instance) {
   return {
     getWorkersList() {
-      return instance.get('workers')
+      return instance.get('workers');
     },
   };
 }

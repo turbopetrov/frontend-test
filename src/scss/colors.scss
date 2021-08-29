@@ -1,14 +1,24 @@
-$dark-grad: linear-gradient(214.96deg, rgba(19, 19, 19, 0.23) -19.62%, rgba(19, 19, 19, 0.85) 30.26%, rgba(19, 19, 19, 0.82) 62.63%, rgba(19, 19, 19, 0) 129.38%);
-$light-grad: linear-gradient(254.76deg, rgba(251, 251, 251, 0.4524) 10.28%, rgba(255, 255, 255, 0.3978) 52.94%, rgba(255, 255, 255, 0.468) 98.52%);
-$orange-grad: linear-gradient(268.36deg, #FDD503 0.14%, #FFA800 98.85%);
+$dark-grad: linear-gradient(
+  214.96deg,
+  rgba(19, 19, 19, 0.23) -19.62%,
+  rgba(19, 19, 19, 0.85) 30.26%,
+  rgba(19, 19, 19, 0.82) 62.63%,
+  rgba(19, 19, 19, 0) 129.38%
+);
+$light-grad: linear-gradient(
+  254.76deg,
+  rgba(251, 251, 251, 0.4524) 10.28%,
+  rgba(255, 255, 255, 0.3978) 52.94%,
+  rgba(255, 255, 255, 0.468) 98.52%
+);
+$orange-grad: linear-gradient(268.36deg, #fdd503 0.14%, #ffa800 98.85%);
 $white: #fff;
 $grey: #8b8b8b;
-$orange: #FDB703;
-$blue:#03A3FD;
-$dark-grey:#373737; 
+$orange: #fdb703;
+$blue: #03a3fd;
+$dark-grey: #373737;
 
-.blur{
+.blur {
   background: $dark-grad;
   backdrop-filter: blur(8px);
 }
-  

@@ -7,33 +7,31 @@ import userSettings from '../components/user-settings.vue';
 
 Vue.use(Router);
 
-
-
 export default new Router({
-  
-  routes:[
+
+  routes: [
     {
-      path:'/',
+      path: '/',
       name: 'auth',
       component: auth,
     },
     {
-      path:'/workers',
+      path: '/workers',
       name: 'workers-list',
       component: workersList,
     },
     {
-      path:'/workers/:id',
+      path: '/workers/:id',
       name: 'worker-page',
       component: workerPage,
-      props:true
+      props: true,
     },
     {
-      path:'/user',
+      path: '/user',
       name: 'user-settings',
       component: userSettings,
-      props:true
+      props: true,
     },
 
-  ]
-})
+  ],
+});

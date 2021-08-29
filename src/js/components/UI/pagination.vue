@@ -10,10 +10,13 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import { mapGetters} from "vuex";
 export default {
   props:{
-    pageCount: Number
+    pageCount:{
+      type: Number,
+      default:1
+    }
   },
   data(){
     return{
@@ -45,12 +48,12 @@ export default {
     height: 50px;
   }
   &__item{
-    list-style: none;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: 30px;
     height: 30px;
+    list-style: none;
     border: 1px solid $orange;
     border-radius: 50%;
     cursor: pointer;

@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import workers from './modules/workers';
 import user from './modules/user';
-import workerData from './modules/workerData'
+import workerData from './modules/workerData';
 
 Vue.use(Vuex);
 

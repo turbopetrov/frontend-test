@@ -9,8 +9,14 @@
 <script>
 export default {
   props: {
-    profileKey: String,
-    profileValue: String,
+    profileKey:{
+      type:String,
+      default:""
+    },
+    profileValue:{
+      type:String,
+      default:""
+    }
   },
   data() {
     return {};
@@ -28,9 +34,9 @@ export default {
   }
   &__value {
     width: 50%;
+    margin-left: 100px;
     text-align: end;
     vertical-align: middle;
-    margin-left: 100px;
   }
 }
 </style>

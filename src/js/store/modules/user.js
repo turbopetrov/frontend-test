@@ -1,4 +1,7 @@
-import axios from "axios";
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-undef */
+/* eslint-disable no-console */
+import axios from 'axios';
 
 export default {
   state: {
@@ -6,29 +9,28 @@ export default {
     loginStatus: false,
   },
   actions: {
-      GET_USER_FROM_API({ commit }) {
+    GET_USER_FROM_API({ commit }) {
       return axios
-        .get("http://test.atwinta.ru/api/v1/user", {
+        .get('http://test.atwinta.ru/api/v1/user', {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         })
         .then((response) => {
-          commit("SET_USER_TO_STATE", response.data);
+          commit('SET_USER_TO_STATE', response.data);
         })
         .catch((error) => console.error(error));
     },
     SET_USER_TO_API({ commit }, userData) {
       return axios
-        .post("http://test.atwinta.ru/api/v1/user", userData,
+        .post('http://test.atwinta.ru/api/v1/user', userData,
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
-          }
-        )
+          })
         .then((response) => {
-          commit("SET_USER_TO_STATE", response.data);
+          commit('SET_USER_TO_STATE', response.data);
         })
         .catch((error) => console.error(error));
     },

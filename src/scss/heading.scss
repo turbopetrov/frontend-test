@@ -1,33 +1,33 @@
-%heading {  
+%heading {
   margin: 0;
   padding: 0;
-  font-weight: 700;
-  font-family: 'Roboto', sans-serif;
-  font-style:  normal;
   color: $white;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
 }
-.heading_xl{
-  @extend %heading;
+.heading_xl {
   font-size: 3.75em;
   line-height: 100%;
-}
-.heading_lg{
   @extend %heading;
+}
+.heading_lg {
   font-size: 2.25em;
   line-height: 100%;
-}
-.heading_md{
   @extend %heading;
+}
+.heading_md {
   font-size: 2em;
   line-height: 100%;
-}
-.heading_sm{
   @extend %heading;
+}
+.heading_sm {
   font-size: 1.5em;
   line-height: 100%;
-}
-.heading_xs{
   @extend %heading;
+}
+.heading_xs {
   font-size: 1em;
   line-height: 100%;
+  @extend %heading;
 }

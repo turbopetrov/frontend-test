@@ -12,9 +12,18 @@
 <script>
 export default {
   props:{
-    imgPath: String,
-    name: String,
-    id: Number,
+    imgPath:{
+      type:String,
+      default:""
+    },
+    name:{
+      type: String,
+      default:""
+    },
+    id:{
+      type: Number,
+      default:0,
+    },
   },
   data(){
     return{}
@@ -26,29 +35,29 @@ export default {
   .card{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
     width: 300px;
     height: 390px;
+    padding: 25px 37px 40px 37px;
     border: 2px solid $orange;
     border-radius: 10px;
-    box-sizing: border-box;
-    padding: 25px 37px 40px 37px;
     &__img{
-      border-radius: 50%;
       width: 172px;
       height: 172px;
+      border-radius: 50%;
     }
     &__button{
-      align-self: center;
-      outline: none;
-      border: none;
       display: block;
-      margin: 0 auto;
+      align-self: center;
       width: 220px;
       height: 46px;
-      border-radius: 30px;
+      margin: 0 auto;
       background: $orange;
+      border: 0;
+      border-radius: 30px;
+      outline: none;
       cursor: pointer;
     }
   }

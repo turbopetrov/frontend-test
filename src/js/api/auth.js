@@ -1,7 +1,7 @@
-export default function (instance) {
+export default function authModule(instance) {
   return {
     login(payload) {
-      return instance.post('auth/login', payload)
+      return instance.post('auth/login', payload);
     },
   };
 }

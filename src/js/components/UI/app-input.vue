@@ -25,11 +25,23 @@ label
 <script>
 export default {
   props: {
-    inputType: String,
+    inputType: {
+      type: String,
+      default:"input"
+    },
     isRequire: Boolean,
-    placeholder: String,
-    inputValue: String,
-    defaultValue: String,
+    placeholder: {
+      type:String,
+      default: "placeholder"
+    },
+    inputValue: {
+      type:String,
+      default:""
+    },
+    defaultValue: {
+      type: String,
+      default:""
+    },
   },
   data() {
     return {};
@@ -43,14 +55,14 @@ label {
 }
 .input {
   position: absolute;
-  color: $white;
-  border: none;
-  border-bottom: 2px solid $white;
-  background: none;
-  outline: none;
   width: 100%;
   height: 31px;
   padding-left: 15px;
+  color: $white;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid $white;
+  outline: none;
   transition: 0.2s;
   &__placeholder {
     position: absolute;
@@ -59,9 +71,9 @@ label {
     transition: 0.5s;
     &_xs {
       position: absolute;
-      font-size: 0.85em;
-      left: 15px;
       top: -20px;
+      left: 15px;
+      font-size: 0.85em;
     }
   }
   &__require-sign {
@@ -73,8 +85,8 @@ label {
   }
 
   &:focus ~ .input__placeholder {
-    font-size: 0.85em;
     top: -20px;
+    font-size: 0.85em;
   }
 }
 textarea.input {

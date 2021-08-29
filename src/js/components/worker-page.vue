@@ -49,12 +49,13 @@ export default {
       return this.$route.params.id;
     },
   },
+  mounted(){
+  this.GET_WORKER_DATA_FROM_API(this.id)
+  },
   methods:{
     ...mapActions(['GET_WORKER_DATA_FROM_API'])
   },
-  mounted(){
-    this.GET_WORKER_DATA_FROM_API(this.id)
-    }
+
 };
 </script>
 
@@ -67,24 +68,24 @@ export default {
   &__header {
     position: relative;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
+    justify-content: flex-end;
     width: 100%;
     height: 200px;
-    background: $orange-grad;
     margin-top: 90px;
+    background: $orange-grad;
   }
   &__title {
     max-width: 50%;
-    color: $dark-grey;
     margin-right: 80px;
+    color: $dark-grey;
   }
   &__img {
-    width: 260px;
-    border-radius: 50%;
     position: absolute;
     top: 50px;
     left: 15%;
+    width: 260px;
+    border-radius: 50%;
   }
   &__profile {
     display: flex;

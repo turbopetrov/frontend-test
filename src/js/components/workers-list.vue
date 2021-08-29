@@ -40,6 +40,9 @@ export default {
   computed: {
     ...mapGetters(["WORKERS","USER", "PAGINATION"]),
   },
+  mounted() {
+    this.GET_WORKERS_FROM_API();
+  },
   methods: {
     ...mapActions(["GET_WORKERS_FROM_API"]),
     goToUserProfile(){
@@ -49,26 +52,23 @@ export default {
       this.GET_WORKERS_FROM_API(page);
     }
   },
-  mounted() {
-    this.GET_WORKERS_FROM_API();
-  },
 };
 </script>
 
 <style lang="scss" scoped>
 .account-list {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
   &__wrapper {
     width: 1020px;
   }
   &__card-block {
-    width: 100%;
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
   }
   &__card {
     margin-bottom: 30px;

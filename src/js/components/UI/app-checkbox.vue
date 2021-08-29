@@ -14,7 +14,10 @@
 <script>
 export default {
   props:{
-    checkboxText: String,
+    checkboxText:{
+      type: String,
+      default:"Check me!"
+    },
     isDisabled: Boolean,
   },
   data(){
@@ -51,8 +54,8 @@ export default {
   display: none;
 }
 .checkbox__text{
-  vertical-align: top;
   line-height: 24px;
+  vertical-align: top;
 }
 .checkbox__fake-checkbox::before {
   position: absolute;

@@ -15,10 +15,10 @@ export default {
 
 <style lang="scss" scoped>
   .page{
+    min-height: 100vh;
     margin: 0;
     padding: 0;
     background: url('../assets/img/bg.jpg') fixed;
-    min-height: 100vh;
   }
 
 </style>

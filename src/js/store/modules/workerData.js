@@ -1,4 +1,8 @@
-import axios from "axios";
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-undef */
+/* eslint-disable no-console */
+import axios from 'axios';
+
 export default {
   state: {
     workerData: {},
@@ -13,11 +17,11 @@ export default {
       return axios
         .get(`http://test.atwinta.ru/api/v1/workers/${user}`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         })
         .then((response) => {
-          commit("SET_WORKER_DATA_TO_STATE", response.data);
+          commit('SET_WORKER_DATA_TO_STATE', response.data);
         })
         .catch((error) => console.error(error));
     },

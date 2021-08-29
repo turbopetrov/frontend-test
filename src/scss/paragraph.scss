@@ -1,30 +1,29 @@
-%paragraph {  
+%paragraph {
   margin: 0;
   padding: 0;
-  text-align: center;
-  font-weight: 300;
-  font-family: 'Roboto', sans-serif;
-  font-style:  italic;
   color: $grey;
+  font-weight: 300;
+  font-family: "Roboto", sans-serif;
+  font-style: italic;
+  text-align: center;
 }
-.paragraph_lg{
-  @extend %paragraph;
+.paragraph_lg {
   font-size: 2em;
   line-height: 100%;
-}
-.paragraph_md{
   @extend %paragraph;
+}
+.paragraph_md {
   font-size: 1.25em;
   line-height: 100%;
-}
-.paragraph_sm{
   @extend %paragraph;
+}
+.paragraph_sm {
   font-size: 1em;
   line-height: 100%;
-}
-.paragraph_xs{
   @extend %paragraph;
-  font-size: .9em;
-  line-height: 200%;
 }
-
+.paragraph_xs {
+  font-size: 0.9em;
+  line-height: 200%;
+  @extend %paragraph;
+}

@@ -10,8 +10,14 @@ input.button.heading_xs(
 <script>
 export default {
   props: {
-    buttonType: String,
-    buttonValue: String,
+    buttonType:{
+      type: String,
+      default: "button"
+    },
+    buttonValue:{
+      type: String,
+      default: "Click me!"
+    },
   },
   data() {
     return {};
@@ -26,16 +32,16 @@ export default {
 
 <style lang="scss" scoped>
 .button {
-  align-self: center;
-  outline: none;
-  border: none;
   display: block;
-  margin: 0 auto;
+  align-self: center;
   width: 280px;
   height: 58px;
-  border-radius: 30px;
-  cursor: pointer;
+  margin: 0 auto;
   background: $orange;
+  border: 0;
+  border-radius: 30px;
+  outline: none;
+  cursor: pointer;
   &__submit {
     background: $blue;
   }

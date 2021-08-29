@@ -101,6 +101,9 @@ export default {
   computed: {
     ...mapGetters(["USER"]),
   },
+  mounted() {
+    this.GET_USER_FROM_API();
+  },
   methods: {
     ...mapActions(["GET_USER_FROM_API", "SET_USER_TO_API"]),
     changeUserData(){
@@ -111,32 +114,29 @@ export default {
       this.$router.push({name:'auth'})
     },
   },
-  mounted() {
-    this.GET_USER_FROM_API();
-  },
 };
 </script>
 
 <style lang="scss" scoped>
 .user-settings {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
   padding-bottom: 50px;
   &__wrapper {
     width: 1020px;
   }
   &__form {
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100%;
   }
   &__input-wrapper {
-    width: 100%;
     display: flex;
     justify-content: space-between;
+    width: 100%;
     margin-bottom: 70px;
   }
   &__text-area-wrapper {
