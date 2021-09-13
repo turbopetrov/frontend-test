@@ -1,19 +1,23 @@
 <template lang="pug">
 label
-  span.paragraph_xs.default-value|{{defaultValue}}
+  span.paragraph_xs.default-value {{ defaultValue }}
   textarea.input(
     v-if="inputType === 'area'",
     type="text",
     :required="isRequire",
     :value="inputValue",
-    @input="$emit('input', $event.target.value)"
+    @input="$emit('input', $event.target.value)",
+    @blur="$emit('blur')",
+    @focus="$emit('focus')"
   )
   input.input(
     v-else,
     type="text",
     :required="isRequire",
     :value="inputValue",
-    @input="$emit('input', $event.target.value)"
+    @input="$emit('input', $event.target.value)",
+    @blur="$emit('blur')",
+    @focus="$emit('focus')"
   )
 
   span.paragraph_md(
@@ -27,20 +31,20 @@ export default {
   props: {
     inputType: {
       type: String,
-      default:"input"
+      default: "input",
     },
     isRequire: Boolean,
     placeholder: {
-      type:String,
-      default: "placeholder"
+      type: String,
+      default: "placeholder",
     },
     inputValue: {
-      type:String,
-      default:""
+      type: String,
+      default: "",
     },
     defaultValue: {
       type: String,
-      default:""
+      default: "",
     },
   },
   data() {
@@ -94,7 +98,7 @@ textarea.input {
   border: 2px solid $white;
   border-radius: 5px;
 }
-.default-value{
+.default-value {
   margin-top: 20px;
 }
 </style>

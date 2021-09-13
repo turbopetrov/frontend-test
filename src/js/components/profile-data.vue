@@ -9,14 +9,14 @@
 <script>
 export default {
   props: {
-    profileKey:{
-      type:String,
-      default:""
+    profileKey: {
+      type: String,
+      default: '',
     },
-    profileValue:{
-      type:String,
-      default:""
-    }
+    profileValue: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {};

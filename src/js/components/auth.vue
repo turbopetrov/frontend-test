@@ -1,21 +1,30 @@
+/* eslint-disable linebreak-style */
 <template lang="pug">
 .auth
   .auth__wrapper.blur
     form.auth__form
       h2.auth__title.heading_lg.
         Авторизация
-      app-input.auth__login(
-        isRequire,
-        placeholder="Ваша электронная почта",
-        :inputValue="email",
-        v-model="email"
+      ValidationProvider.validation-wrap(
+        name="email",
+        rules="required|email",
+        v-slot="{ errors }"
       )
-      app-input.auth__pass(
-        isRequire,
-        placeholder="Ваш пароль",
-        :inputValue="pass",
-        v-model="pass"
-      )
+        app-input.auth__login(
+          isRequire,
+          placeholder="Ваша электронная почта",
+          :inputValue="email",
+          v-model="email"
+        )
+        p.auth__error-message.error {{ errors[0] }}
+      ValidationProvider.validation-wrap(name="пароль" rules="required", v-slot="{ errors }")
+        app-input.auth__pass(
+          isRequire,
+          placeholder="Ваш пароль",
+          :inputValue="pass",
+          v-model="pass"
+        )
+        p.auth__error-message.error {{ errors[0] }}
       a.auth__forgetPass.paragraph_sm(href="#") Забыли пароль?
       app-button(buttonType="button", buttonValue="Войти", @action="login()")
       span.paragraph_sm(:class="LOGIN_STATUS ? 'success' : 'error'").
@@ -24,26 +33,38 @@
 </template>
 
 <script>
-import input from "./UI/app-input.vue";
-import button from "./UI/app-button.vue";
-import { mapGetters } from "vuex";
+import { ValidationProvider, extend } from 'vee-validate';
+import { required, email } from 'vee-validate/dist/rules';
+import { mapGetters } from 'vuex';
+import input from './UI/app-input.vue';
+import button from './UI/app-button.vue';
+
+extend('email', {
+  ...email,
+  message: 'Введите корректный {_field_}',
+});
+extend('required', {
+  ...required,
+  message: 'Введите {_field_}',
+});
 
 export default {
   components: {
-    "app-input": input,
-    "app-button": button,
+    ValidationProvider,
+    'app-input': input,
+    'app-button': button,
   },
 
   data() {
     return {
-      email: "",
-      pass: "",
-      message: "",
+      email: '',
+      pass: '',
+      message: '',
     };
   },
 
   computed: {
-    ...mapGetters(["LOGIN_STATUS"]),
+    ...mapGetters(['LOGIN_STATUS']),
   },
   mounted() {
     this.autoLogin();
@@ -56,25 +77,25 @@ export default {
           password: this.pass,
         })
         .then((response) => {
-          localStorage.setItem("token", response.data.token);
-          this.$store.commit("changeLoginStatus", true);
-          this.message = "Вы авторизованы";
+          localStorage.setItem('token', response.data.token);
+          this.$store.commit('changeLoginStatus', true);
+          this.message = 'Вы авторизованы';
           setTimeout(() => {
-            this.$router.push({ name: "workers-list" });
+            this.$router.push({ name: 'workers-list' });
           }, 1500);
         })
         .catch((error) => {
           console.log(error);
-          this.$store.commit("changeLoginStatus", false);
-          this.message = "Неверный логин или пароль";
+          this.$store.commit('changeLoginStatus', false);
+          this.message = 'Неверный логин или пароль';
         });
     },
     autoLogin() {
-      if (localStorage.getItem("token")) {
-        this.$store.commit("changeLoginStatus", true);
-        this.message = "Вы авторизованы";
+      if (localStorage.getItem('token')) {
+        this.$store.commit('changeLoginStatus', true);
+        this.message = 'Вы авторизованы';
         setTimeout(() => {
-          this.$router.push({ name: "workers-list" });
+          this.$router.push({ name: 'workers-list' });
         }, 1500);
       }
     },
@@ -83,6 +104,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.validation-wrap {
+  position: relative;
+  display: block;
+}
 .auth {
   display: flex;
   align-items: center;
@@ -103,6 +128,10 @@ export default {
   }
   &__pass {
     position: relative;
+    display: block;
+  }
+  &__login {
+    display: block;
   }
   &__forgetPass {
     position: absolute;
@@ -113,11 +142,17 @@ export default {
     border-bottom: 1px solid $orange;
     cursor: pointer;
   }
+  &__error-message {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    display: block;
+  }
   .success {
     color: greenyellow;
   }
   .error {
-    color: red;
+    color: rgb(240, 59, 59);
   }
 }
 </style>

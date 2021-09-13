@@ -5,12 +5,13 @@
       h2.user-settings__title.heading_lg Профиль
     form.user-settings__form
       .user-settings__input-wrapper
-        app-input.user-settings__input_lg(
-          isRequire,
-          placeholder="Ваше имя",
-          :inputValue="this.USER.name"
-          v-model='userData.name'
-        )
+        ValidationProvider.validation-wrap(name="ваше имя", rules="required")
+          app-input.user-settings__input_lg(
+            isRequire,
+            placeholder="Ваше имя",
+            :inputValue="this.USER.name"
+            v-model='userData.name'
+          )
       .user-settings__input-wrapper
         app-input.user-settings__input_sm(
           isRequire
@@ -82,42 +83,64 @@
 </template>
 
 <script>
-import checkbox from "./UI/app-checkbox.vue";
-import input from "./UI/app-input.vue";
-import button from "./UI/app-button.vue";
-import { mapActions } from "vuex";
-import { mapGetters } from "vuex";
+import { ValidationProvider, extend } from 'vee-validate';
+import { required } from 'vee-validate/dist/rules';
+import { mapActions, mapGetters } from 'vuex';
+import checkbox from './UI/app-checkbox.vue';
+import input from './UI/app-input.vue';
+import button from './UI/app-button.vue';
+
+extend('required', {
+  ...required,
+  message: 'Введите {_field_}',
+});
+
 export default {
   components: {
-    "app-input": input,
-    "app-button": button,
-    "app-checkbox": checkbox,
+    ValidationProvider,
+    'app-input': input,
+    'app-button': button,
+    'app-checkbox': checkbox,
   },
   data() {
     return {
-      userData:{}
+      userData: {},
     };
   },
   computed: {
-    ...mapGetters(["USER"]),
+    ...mapGetters(['USER']),
   },
   mounted() {
     this.GET_USER_FROM_API();
   },
   methods: {
-    ...mapActions(["GET_USER_FROM_API", "SET_USER_TO_API"]),
-    changeUserData(){
-      this.SET_USER_TO_API(this.userData)
+    ...mapActions(['GET_USER_FROM_API', 'SET_USER_TO_API']),
+    changeUserData() {
+      this.SET_USER_TO_API(this.userData);
     },
     exit() {
       localStorage.removeItem('token'),
-      this.$router.push({name:'auth'})
+      this.$router.push({ name: 'auth' });
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.validation-wrap {
+  
+  display: flex;
+  width: 100%;
+}
+.error-message {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    display: block;
+  }
+.error {
+    color: rgb(240, 59, 59);
+  }
 .user-settings {
   display: flex;
   flex-direction: column;
