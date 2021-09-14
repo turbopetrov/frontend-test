@@ -4,8 +4,11 @@ label
   textarea.input(
     v-if="inputType === 'area'",
     type="text",
+    :disabled="isReadonly",
+    :readonly="isReadonly",
     :required="isRequire",
     :value="inputValue",
+    :class="isReadonly?'disabled':''",
     @input="$emit('input', $event.target.value)",
     @blur="$emit('blur')",
     @focus="$emit('focus')"
@@ -13,6 +16,8 @@ label
   input.input(
     v-else,
     type="text",
+    :readonly="isReadonly",
+    :disabled="isReadonly",
     :required="isRequire",
     :value="inputValue",
     @input="$emit('input', $event.target.value)",
@@ -31,20 +36,27 @@ export default {
   props: {
     inputType: {
       type: String,
-      default: "input",
+      default: 'input',
     },
-    isRequire: Boolean,
+    isRequire: {
+      type: Boolean,
+      default: false
+    },
+    isReadonly:{
+      type: Boolean,
+      default: false
+    },
     placeholder: {
       type: String,
-      default: "placeholder",
+      default: 'placeholder',
     },
     inputValue: {
       type: String,
-      default: "",
+      default: '',
     },
     defaultValue: {
       type: String,
-      default: "",
+      default: '',
     },
   },
   data() {
@@ -80,6 +92,10 @@ label {
       font-size: 0.85em;
     }
   }
+  &:disabled{
+    color: $grey;
+    border-color: $grey;
+  }
   &__require-sign {
     color: $orange;
   }
@@ -101,4 +117,5 @@ textarea.input {
 .default-value {
   margin-top: 20px;
 }
+
 </style>

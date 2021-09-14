@@ -3,89 +3,106 @@
   .user-settings__wrapper
     .user-settings__header
       h2.user-settings__title.heading_lg Профиль
-    form.user-settings__form
+    ValidationObserver(tag="form",).user-settings__form
       .user-settings__input-wrapper
-        ValidationProvider.validation-wrap(name="ваше имя", rules="required")
+        ValidationProvider.validation-wrap(
+          name="имя",
+          rules="required",
+          v-slot="{ errors }"
+        )
           app-input.user-settings__input_lg(
             isRequire,
             placeholder="Ваше имя",
-            :inputValue="this.USER.name"
-            v-model='userData.name'
+            :inputValue="USER.name",
+            v-model="userData.name"
           )
+          p.error-message.error {{ errors[0] }}
       .user-settings__input-wrapper
         app-input.user-settings__input_sm(
-          isRequire
-          placeholder="Email"
-          :inputValue="this.USER.email"
+          isReadonly=true,
+          placeholder="Email",
+          :inputValue="USER.email",
+          v-model="userData.email"
+        )
+        ValidationProvider.validation-wrap_sm(
+          name="номер телефона",
+          tag="div",
+          changed=true,
+          rules="required|digits:10",
+          v-slot="{ errors }"
+        )
+          app-input.user-settings__input_lg(
+            defaultValue="+7",
+            isRequire,
+            placeholder="Номер телефона",
+            :inputValue="USER.phone",
+            v-model="userData.phone"
           )
-        app-input.user-settings__input_sm(
-          defaultValue="+7"
-          isRequire=false,
-          placeholder="Номер телефона"
-          :inputValue="this.USER.phone"
-          v-model='userData.phone'
-          )
+          p.error-message.error {{ errors[0] }}
       .user-settings__input-wrapper
-        app-input.user-settings__input_sm(
-          isRequire=false
-          placeholder="Город"
-          :inputValue="this.USER.city"
-          v-model='userData.city'
+        ValidationProvider.validation-wrap_sm(
+          name="ваш город",
+          tag="div",
+          rules="required",
+          v-slot="{ errors }"
+        )
+          app-input.user-settings__input_lg(
+            isRequire,
+            placeholder="Город",
+            :inputValue="USER.city",
+            v-model="userData.city"
           )
+          p.error-message.error {{ errors[0] }}
         app-input.user-settings__input_sm(
-          isRequire=false,
-          placeholder="Год рождения"
-          :inputValue="this.USER.birthday"
-          v-model='userData.birthday'
-          )
+          placeholder="Год рождения",
+          :inputValue="USER.birthday",
+          v-model="userData.birthday"
+        )
       .user-settings__input-wrapper
         app-input.user-settings__input_lg(
-          isRequire=false,
-          placeholder="Тип задания"
-          :inputValue="this.USER.type"
+          isReadonly=true,
+          placeholder="Тип задания",
+          :inputValue="USER.type"
         )
       .user-settings__input-wrapper
         app-input.user-settings__input_sm(
-          defaultValue="https://"
-          isRequire=false,
-          placeholder="Ссылка на проект"
-          :inputValue="this.USER.github"
-          v-model='userData.github'
-          )
+          defaultValue="https://",
+          placeholder="Ссылка на проект",
+          :inputValue="USER.github",
+          v-model="userData.github"
+        )
         app-input.user-settings__input_sm(
-          defaultValue="@"
-          isRequire=false,
-          placeholder="Telegram"
-          :inputValue='this.USER.telegram'
-          v-model='userData.telegram'
+          defaultValue="@",
+          placeholder="Telegram",
+          :inputValue="USER.telegram",
+          v-model="userData.telegram"
         )
       .user-settings__input-wrapper
         .user-settings__text-area-wrapper
           h3.heading_sm.user-settings__text-area-title Дополнительно
           app-input.user-settings__input_lg(
             inputType="area",
-            isRequire=false,
-            placeholder="Расскажите о себе"
-            :inputValue='this.USER.about'
-            v-model='userData.about'
+            placeholder="Расскажите о себе",
+            :inputValue="USER.about",
+            v-model="userData.about"
           )
       app-checkbox.user-settings__checkbox(
-        isDisabled
+        isDisabled,
         checkboxText="Задание выполнено"
       )
       .user-settings__buttons-block
         app-button.user-settings__submit(
           buttonType="submit",
-          submitValue="Сохранить"
-          @action='changeUserData'
+          buttonValue="Сохранить",
+          @action="changeUserData"
         )
         app-button(buttonType="button", buttonValue="Выйти", @action="exit")
 </template>
 
 <script>
-import { ValidationProvider, extend } from 'vee-validate';
-import { required } from 'vee-validate/dist/rules';
 import { mapActions, mapGetters } from 'vuex';
+import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
+import { required, digits } from 'vee-validate/dist/rules';
 import checkbox from './UI/app-checkbox.vue';
 import input from './UI/app-input.vue';
 import button from './UI/app-button.vue';
@@ -94,9 +111,14 @@ extend('required', {
   ...required,
   message: 'Введите {_field_}',
 });
+extend('digits', {
+  ...digits,
+  message: 'Введите корректный {_field_}',
+});
 
 export default {
   components: {
+    ValidationObserver,
     ValidationProvider,
     'app-input': input,
     'app-button': button,
@@ -113,14 +135,17 @@ export default {
   mounted() {
     this.GET_USER_FROM_API();
   },
+  beforeUpdate() {
+    this.userData = this.USER;
+  },
   methods: {
     ...mapActions(['GET_USER_FROM_API', 'SET_USER_TO_API']),
     changeUserData() {
       this.SET_USER_TO_API(this.userData);
     },
     exit() {
-      localStorage.removeItem('token'),
-      this.$router.push({ name: 'auth' });
+      // eslint-disable-next-line no-unused-expressions
+      localStorage.removeItem('token'), this.$router.push({ name: 'auth' });
     },
   },
 };
@@ -128,19 +153,24 @@ export default {
 
 <style lang="scss" scoped>
 .validation-wrap {
-  
+  position: relative;
   display: flex;
   width: 100%;
+  &_sm{
+    position: relative;
+    display: flex;
+    width: 40%;
+  }
 }
 .error-message {
-    position: absolute;
-    top: 40px;
-    left: 0;
-    display: block;
-  }
+  position: absolute;
+  top: 36px;
+  left: 0;
+  display: block;
+}
 .error {
-    color: rgb(240, 59, 59);
-  }
+  color: rgb(240, 59, 59);
+}
 .user-settings {
   display: flex;
   flex-direction: column;
@@ -160,7 +190,7 @@ export default {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 70px;
+    margin-bottom: 80px;
   }
   &__text-area-wrapper {
     display: flex;
@@ -171,7 +201,7 @@ export default {
   &__text-area-title {
     margin-bottom: 30px;
   }
-  &__checkbox{
+  &__checkbox {
     margin-bottom: 30px;
   }
   &__buttons-block {
