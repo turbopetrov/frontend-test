@@ -3,7 +3,11 @@
   .user-settings__wrapper
     .user-settings__header
       h2.user-settings__title.heading_lg Профиль
-    ValidationObserver(tag="form",).user-settings__form
+    ValidationObserver.user-settings__form(
+      tag="form",
+      v-slot="{ invalid }",
+      @submit.prevent="changeUserData"
+    )
       .user-settings__input-wrapper
         ValidationProvider.validation-wrap(
           name="имя",
@@ -14,20 +18,20 @@
             isRequire,
             placeholder="Ваше имя",
             :inputValue="USER.name",
-            v-model="userData.name"
+            v-model="USER.name"
           )
           p.error-message.error {{ errors[0] }}
       .user-settings__input-wrapper
         app-input.user-settings__input_sm(
-          isReadonly=true,
+          isReadonly,
           placeholder="Email",
           :inputValue="USER.email",
-          v-model="userData.email"
+          v-model="USER.email"
         )
         ValidationProvider.validation-wrap_sm(
           name="номер телефона",
           tag="div",
-          changed=true,
+          changed,
           rules="required|digits:10",
           v-slot="{ errors }"
         )
@@ -36,7 +40,7 @@
             isRequire,
             placeholder="Номер телефона",
             :inputValue="USER.phone",
-            v-model="userData.phone"
+            v-model="USER.phone"
           )
           p.error-message.error {{ errors[0] }}
       .user-settings__input-wrapper
@@ -50,17 +54,17 @@
             isRequire,
             placeholder="Город",
             :inputValue="USER.city",
-            v-model="userData.city"
+            v-model="USER.city"
           )
           p.error-message.error {{ errors[0] }}
         app-input.user-settings__input_sm(
           placeholder="Год рождения",
           :inputValue="USER.birthday",
-          v-model="userData.birthday"
+          v-model="USER.birthday"
         )
       .user-settings__input-wrapper
         app-input.user-settings__input_lg(
-          isReadonly=true,
+          isReadonly,
           placeholder="Тип задания",
           :inputValue="USER.type"
         )
@@ -69,13 +73,13 @@
           defaultValue="https://",
           placeholder="Ссылка на проект",
           :inputValue="USER.github",
-          v-model="userData.github"
+          v-model="USER.github"
         )
         app-input.user-settings__input_sm(
           defaultValue="@",
           placeholder="Telegram",
           :inputValue="USER.telegram",
-          v-model="userData.telegram"
+          v-model="USER.telegram"
         )
       .user-settings__input-wrapper
         .user-settings__text-area-wrapper
@@ -84,17 +88,22 @@
             inputType="area",
             placeholder="Расскажите о себе",
             :inputValue="USER.about",
-            v-model="userData.about"
+            v-model="USER.about"
           )
-      app-checkbox.user-settings__checkbox(
-        isDisabled,
-        checkboxText="Задание выполнено"
-      )
+      .user-settings__input-wrapper
+        app-checkbox.user-settings__checkbox(
+          isDisabled,
+          checkboxText="Задание выполнено"
+        )
+        p.user-settings__message.paragraph_sm.success(
+          v-if="USER_DATA_STATUS")| Данные успешно изменены
+        p.user-settings__message.paragraph_sm.error(
+          v-else-if="USER_DATA_STATUS===false")| Ошибка!
       .user-settings__buttons-block
         app-button.user-settings__submit(
           buttonType="submit",
           buttonValue="Сохранить",
-          @action="changeUserData"
+          :isDisabled="invalid",
         )
         app-button(buttonType="button", buttonValue="Выйти", @action="exit")
 </template>
@@ -126,22 +135,20 @@ export default {
   },
   data() {
     return {
-      userData: {},
+
     };
   },
   computed: {
-    ...mapGetters(['USER']),
+    ...mapGetters(['USER', 'USER_DATA_STATUS']),
   },
   mounted() {
     this.GET_USER_FROM_API();
-  },
-  beforeUpdate() {
-    this.userData = this.USER;
+    this.userData = this.$store.state.user.user;
   },
   methods: {
     ...mapActions(['GET_USER_FROM_API', 'SET_USER_TO_API']),
     changeUserData() {
-      this.SET_USER_TO_API(this.userData);
+      this.SET_USER_TO_API(this.USER);
     },
     exit() {
       // eslint-disable-next-line no-unused-expressions
@@ -156,7 +163,7 @@ export default {
   position: relative;
   display: flex;
   width: 100%;
-  &_sm{
+  &_sm {
     position: relative;
     display: flex;
     width: 40%;
@@ -201,9 +208,6 @@ export default {
   &__text-area-title {
     margin-bottom: 30px;
   }
-  &__checkbox {
-    margin-bottom: 30px;
-  }
   &__buttons-block {
     display: flex;
     flex-direction: row;
@@ -226,4 +230,10 @@ export default {
     width: 100%;
   }
 }
+.success {
+    color: greenyellow;
+  }
+  .error {
+    color: rgb(240, 59, 59);
+  }
 </style>

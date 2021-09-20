@@ -7,6 +7,7 @@ export default {
   state: {
     user: {},
     loginStatus: false,
+    userDataStatus: null,
   },
   actions: {
     GET_USER_FROM_API({ commit }) {
@@ -23,14 +24,14 @@ export default {
     },
     SET_USER_TO_API({ commit }, userData) {
       return axios
-        .post('http://test.atwinta.ru/api/v1/user', userData,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-          })
+        .post('http://test.atwinta.ru/api/v1/user', userData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        })
         .then((response) => {
           commit('SET_USER_TO_STATE', response.data);
+          commit('CHANGE_USER_DATA_STATUS', response.status);
         })
         .catch((error) => console.error(error));
     },
@@ -45,6 +46,9 @@ export default {
     USER(state) {
       return state.user;
     },
+    USER_DATA_STATUS(state) {
+      return state.userDataStatus;
+    },
   },
   mutations: {
     SET_USER_TO_STATE(state, currentUser) {
@@ -52,6 +56,11 @@ export default {
     },
     changeLoginStatus(state, status) {
       state.loginStatus = status;
+    },
+    CHANGE_USER_DATA_STATUS(state, status) {
+      if (status === 200) {
+        state.userDataStatus = true;
+      } else state.userDataStatus = false;
     },
   },
 };

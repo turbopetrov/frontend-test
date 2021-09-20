@@ -3,7 +3,8 @@ input.button.heading_xs(
   :type="buttonType",
   :value="buttonValue",
   @click='handler'
-  :class="buttonType === 'submit' ? 'button__submit' : null"
+  :class="[buttonType === 'submit' ? 'button__submit' : null, {_disabled: isDisabled}]"
+  :disabled="isDisabled"
 )
 </template>
 
@@ -12,11 +13,15 @@ export default {
   props: {
     buttonType:{
       type: String,
-      default: "button"
+      default: 'button',
     },
     buttonValue:{
       type: String,
-      default: "Click me!"
+      default: 'Click me!',
+    },
+    isDisabled:{
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -24,7 +29,7 @@ export default {
   },
   methods: {
     handler() {
-      this.$emit("action");
+      this.$emit('action');
     },
   },
 };
@@ -45,5 +50,9 @@ export default {
   &__submit {
     background: $blue;
   }
+}
+._disabled{
+  background:$grey;
+  border-color: $dark-grey;
 }
 </style>
