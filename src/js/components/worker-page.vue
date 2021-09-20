@@ -32,28 +32,28 @@
 </template>
 
 <script>
-import profile_data from "./profile-data.vue";
-import { mapGetters } from "vuex";
-import {mapActions} from "vuex";
+import { mapGetters, mapActions } from 'vuex';
+import profileData from './profile-data.vue';
+
 export default {
   components: {
-    "profile-data": profile_data,
+    'profile-data': profileData,
   },
 
   data() {
     return {};
   },
   computed: {
-    ...mapGetters(["WORKER_DATA"]),
+    ...mapGetters(['WORKER_DATA']),
     id() {
       return this.$route.params.id;
     },
   },
-  mounted(){
-  this.GET_WORKER_DATA_FROM_API(this.id)
+  mounted() {
+    this.GET_WORKER_DATA_FROM_API(this.id);
   },
-  methods:{
-    ...mapActions(['GET_WORKER_DATA_FROM_API'])
+  methods: {
+    ...mapActions(['GET_WORKER_DATA_FROM_API']),
   },
 
 };

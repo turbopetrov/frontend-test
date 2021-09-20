@@ -40,11 +40,11 @@ export default {
     },
     isRequire: {
       type: Boolean,
-      default: false
+      default: false,
     },
-    isReadonly:{
+    isReadonly: {
       type: Boolean,
-      default: false
+      default: false,
     },
     placeholder: {
       type: String,

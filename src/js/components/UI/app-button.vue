@@ -11,15 +11,15 @@ input.button.heading_xs(
 <script>
 export default {
   props: {
-    buttonType:{
+    buttonType: {
       type: String,
       default: 'button',
     },
-    buttonValue:{
+    buttonValue: {
       type: String,
       default: 'Click me!',
     },
-    isDisabled:{
+    isDisabled: {
       type: Boolean,
       default: false,
     },

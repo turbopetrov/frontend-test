@@ -11,24 +11,24 @@
 
 <script>
 export default {
-  props:{
-    imgPath:{
-      type:String,
-      default:""
-    },
-    name:{
+  props: {
+    imgPath: {
       type: String,
-      default:""
+      default: '',
     },
-    id:{
+    name: {
+      type: String,
+      default: '',
+    },
+    id: {
       type: Number,
-      default:0,
+      default: 0,
     },
   },
-  data(){
-    return{}
-  }
-}
+  data() {
+    return {};
+  },
+};
 </script>
 
 <style lang="scss" scoped>

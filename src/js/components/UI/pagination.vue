@@ -10,28 +10,29 @@
 </template>
 
 <script>
-import { mapGetters} from "vuex";
-export default {
-  props:{
-    pageCount:{
-      type: Number,
-      default:1
-    }
-  },
-  data(){
-    return{
+import { mapGetters } from 'vuex';
 
-    }
+export default {
+  props: {
+    pageCount: {
+      type: Number,
+      default: 1,
+    },
   },
-  computed:{
-    ...mapGetters(["PAGINATION"])
+  data() {
+    return {
+
+    };
   },
-  methods:{
-    handler(page){
-      this.$emit("changePage", page)
-    }
-  }
-}
+  computed: {
+    ...mapGetters(['PAGINATION']),
+  },
+  methods: {
+    handler(page) {
+      this.$emit('changePage', page);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

@@ -13,24 +13,27 @@
 
 <script>
 export default {
-  props:{
-    checkboxText:{
+  props: {
+    checkboxText: {
       type: String,
-      default:"Check me!"
+      default: 'Check me!',
     },
-    isDisabled: Boolean,
+    isDisabled: {
+      type: Boolean,
+      default: false,
+    },
   },
-  data(){
-    return{
-      is_finished:false
-    }
+  data() {
+    return {
+      is_finished: false,
+    };
   },
-  methods:{
-    handler(){
-      this.$emit("checking", this.is_finished)
-    }
-  }
-}
+  methods: {
+    handler() {
+      this.$emit('checking', this.is_finished);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

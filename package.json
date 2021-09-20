@@ -4,10 +4,10 @@
   "description": "study projects",
   "main": "src/js/index.js",
   "scripts": {
-    "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix",
-    "stylelint": "stylelint ./src/scss",
-    "stylelint:fix": "stylelint ./src/scss --fix",
+    "lint": "eslint ./src/js/**/*",
+    "lint:fix": "eslint ./src/js/**/* --fix",
+    "stylelint": "stylelint ./src/**/*",
+    "stylelint:fix": "stylelint ./src/**/* --fix",
     "build": "webpack --mode production",
     "watch": "webpack --watch ",
     "dev": "webpack serve --open chrome --mode development"

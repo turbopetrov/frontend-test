@@ -25,11 +25,9 @@
           v-model="pass"
         )
         p.auth__error-message.error {{ errors[0] }}
-      a.auth__forgetPass.paragraph_sm(href="#") Забыли пароль?
       app-button(buttonType="button", buttonValue="Войти", @action="login()")
       span.paragraph_sm(:class="LOGIN_STATUS ? 'success' : 'error'").
         {{message}}
-      span.paragraph_sm k2lH7wLztd
 </template>
 
 <script>
@@ -78,21 +76,21 @@ export default {
         })
         .then((response) => {
           localStorage.setItem('token', response.data.token);
-          this.$store.commit('changeLoginStatus', true);
+          this.$store.commit('CHANGE_LOGIN_STATUS', true);
           this.message = 'Вы авторизованы';
           setTimeout(() => {
             this.$router.push({ name: 'workers-list' });
           }, 1500);
         })
         .catch((error) => {
-          console.log(error);
-          this.$store.commit('changeLoginStatus', false);
+          error.log(error);
+          this.$store.commit('CHANGE_LOGIN_STATUS', false);
           this.message = 'Неверный логин или пароль';
         });
     },
     autoLogin() {
       if (localStorage.getItem('token')) {
-        this.$store.commit('changeLoginStatus', true);
+        this.$store.commit('CHANGE_LOGIN_STATUS', true);
         this.message = 'Вы авторизованы';
         setTimeout(() => {
           this.$router.push({ name: 'workers-list' });

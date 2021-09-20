@@ -23,34 +23,34 @@
 </template>
 
 <script>
-import pagination from './UI/pagination.vue'
-import card from "./UI/account-card.vue";
-import button from "./UI/app-button.vue";
-import { mapGetters } from "vuex";
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex';
+import pagination from './UI/pagination.vue';
+import card from './UI/account-card.vue';
+import button from './UI/app-button.vue';
+
 export default {
   components: {
-    "account-card": card,
-    "app-button": button,
-    "app-pagination": pagination
+    'account-card': card,
+    'app-button': button,
+    'app-pagination': pagination,
   },
   data() {
     return {};
   },
   computed: {
-    ...mapGetters(["WORKERS","USER", "PAGINATION"]),
+    ...mapGetters(['WORKERS', 'USER', 'PAGINATION']),
   },
   mounted() {
     this.GET_WORKERS_FROM_API();
   },
   methods: {
-    ...mapActions(["GET_WORKERS_FROM_API"]),
-    goToUserProfile(){
-      this.$router.push({name:"user-settings"});
+    ...mapActions(['GET_WORKERS_FROM_API']),
+    goToUserProfile() {
+      this.$router.push({ name: 'user-settings' });
     },
-    changePage(page){
+    changePage(page) {
       this.GET_WORKERS_FROM_API(page);
-    }
+    },
   },
 };
 </script>

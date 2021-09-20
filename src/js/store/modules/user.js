@@ -54,7 +54,7 @@ export default {
     SET_USER_TO_STATE(state, currentUser) {
       state.user = currentUser;
     },
-    changeLoginStatus(state, status) {
+    CHANGE_LOGIN_STATUS(state, status) {
       state.loginStatus = status;
     },
     CHANGE_USER_DATA_STATUS(state, status) {

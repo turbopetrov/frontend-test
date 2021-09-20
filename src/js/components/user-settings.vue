@@ -92,7 +92,7 @@
           )
       .user-settings__input-wrapper
         app-checkbox.user-settings__checkbox(
-          isDisabled,
+          isDisabled=false,
           checkboxText="Задание выполнено"
         )
         p.user-settings__message.paragraph_sm.success(
@@ -152,7 +152,9 @@ export default {
     },
     exit() {
       // eslint-disable-next-line no-unused-expressions
-      localStorage.removeItem('token'), this.$router.push({ name: 'auth' });
+      localStorage.removeItem('token');
+      this.$router.push({ name: 'auth' });
+      this.$store.commit('CHANGE_LOGIN_STATUS', false);
     },
   },
 };
