@@ -2,7 +2,11 @@
 <template lang="pug">
 .auth
   .auth__wrapper.blur
-    form.auth__form
+    ValidationObserver.auth__form(
+      tag="form",
+      v-slot="{ invalid }",
+      @submit.prevent="login"
+    )
       h2.auth__title.heading_lg.
         Авторизация
       ValidationProvider.validation-wrap(
@@ -14,25 +18,25 @@
           isRequire,
           placeholder="Ваша электронная почта",
           :inputValue="email",
-          v-model="email"
+          v-model="email",
         )
         p.auth__error-message.error {{ errors[0] }}
-      ValidationProvider.validation-wrap(name="пароль" rules="required", v-slot="{ errors }")
+      ValidationProvider.validation-wrap(name="пароль" rules="required|min:10", v-slot="{ errors }")
         app-input.auth__pass(
           isRequire,
           placeholder="Ваш пароль",
           :inputValue="pass",
-          v-model="pass"
+          v-model="pass",
         )
         p.auth__error-message.error {{ errors[0] }}
-      app-button(buttonType="button", buttonValue="Войти", @action="login()")
+      app-button(buttonType="submit", buttonValue="Войти", :isDisabled="invalid")
       span.paragraph_sm(:class="LOGIN_STATUS ? 'success' : 'error'").
         {{message}}
 </template>
 
 <script>
-import { ValidationProvider, extend } from 'vee-validate';
-import { required, email } from 'vee-validate/dist/rules';
+import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
+import { required, email, min } from 'vee-validate/dist/rules';
 import { mapGetters } from 'vuex';
 import input from './UI/app-input.vue';
 import button from './UI/app-button.vue';
@@ -45,9 +49,15 @@ extend('required', {
   ...required,
   message: 'Введите {_field_}',
 });
+extend('min', {
+  ...min,
+  params: ['length'],
+  message: '{_field_} должен быть не менее {length} символов',
+});
 
 export default {
   components: {
+    ValidationObserver,
     ValidationProvider,
     'app-input': input,
     'app-button': button,

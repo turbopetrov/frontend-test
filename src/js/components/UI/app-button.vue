@@ -2,7 +2,7 @@
 input.button.heading_xs(
   :type="buttonType",
   :value="buttonValue",
-  @click='handler'
+  @click='handler',
   :class="[buttonType === 'submit' ? 'button__submit' : null, {_disabled: isDisabled}]"
   :disabled="isDisabled"
 )

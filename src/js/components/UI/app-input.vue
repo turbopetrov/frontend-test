@@ -11,7 +11,8 @@ label
     :class="isReadonly?'disabled':''",
     @input="$emit('input', $event.target.value)",
     @blur="$emit('blur')",
-    @focus="$emit('focus')"
+    @focus="$emit('focus')",
+    v-on:keydown.enter="$emit('keyEnter')",
   )
   input.input(
     v-else,
@@ -22,7 +23,8 @@ label
     :value="inputValue",
     @input="$emit('input', $event.target.value)",
     @blur="$emit('blur')",
-    @focus="$emit('focus')"
+    @focus="$emit('focus')",
+    v-on:keydown.enter="$emit('keyEnter')",
   )
 
   span.paragraph_md(
