@@ -17,7 +17,7 @@ export default {
       return axios
         .get(`http://test.atwinta.ru/api/v1/workers/${user}`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('frontEndTestToken')}`,
           },
         })
         .then((response) => {

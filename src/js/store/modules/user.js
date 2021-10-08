@@ -14,7 +14,7 @@ export default {
       return axios
         .get('http://test.atwinta.ru/api/v1/user', {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('frontEndTestToken')}`,
           },
         })
         .then((response) => {
@@ -26,7 +26,7 @@ export default {
       return axios
         .post('http://test.atwinta.ru/api/v1/user', userData, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('frontEndTestToken')}`,
           },
         })
         .then((response) => {

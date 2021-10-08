@@ -152,7 +152,7 @@ export default {
     },
     exit() {
       // eslint-disable-next-line no-unused-expressions
-      localStorage.removeItem('token');
+      localStorage.removeItem('frontEndTestToken');
       this.$router.push({ name: 'auth' });
       this.$store.commit('CHANGE_LOGIN_STATUS', false);
     },

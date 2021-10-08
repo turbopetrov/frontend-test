@@ -75,7 +75,7 @@ export default {
           password: this.pass,
         })
         .then((response) => {
-          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('frontEndTestToken', response.data.token);
           this.$store.commit('CHANGE_LOGIN_STATUS', true);
           this.message = 'Вы авторизованы';
           setTimeout(() => {
@@ -89,7 +89,7 @@ export default {
         });
     },
     autoLogin() {
-      if (localStorage.getItem('token')) {
+      if (localStorage.getItem('frontEndTestToken')) {
         this.$store.commit('CHANGE_LOGIN_STATUS', true);
         this.message = 'Вы авторизованы';
         setTimeout(() => {

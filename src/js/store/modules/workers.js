@@ -24,7 +24,7 @@ export default {
     GET_WORKERS_FROM_API({ commit }, page = 1) {
       return axios.get(`http://test.atwinta.ru/api/v1/workers?page=${page}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem('frontEndTestToken')}`,
         },
       })
         .then((response) => {
